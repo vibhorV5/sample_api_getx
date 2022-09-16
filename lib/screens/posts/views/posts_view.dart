@@ -9,35 +9,43 @@ class PostsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: Obx(
-      () {
-        return Column(
-          children: [
-            postsController.postList.isEmpty
-                ? Container(
-                    height: 750,
-                    width: 600,
-                    color: Colors.red,
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Sample API using GETX',
+        ),
+      ),
+      backgroundColor: Colors.red,
+      body: SingleChildScrollView(child: Obx(
+        () {
+          return Column(
+            children: [
+              postsController.postList.isEmpty
+                  ? Container(
+                      height: 750,
+                      width: 600,
+                      color: Colors.red,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                  )
-                : Container(
-                    height: 750,
-                    width: 600,
-                    color: Colors.red,
-                    child: ListView.builder(
-                        itemCount: postsController.postList.length,
-                        itemBuilder: (context, index) {
-                          return Text(
-                              postsController.postList[index].body.toString());
-                        }),
-                  )
-          ],
-        );
-      },
-    ));
+                    )
+                  : Container(
+                      height: 750,
+                      width: 600,
+                      color: Colors.red,
+                      child: ListView.builder(
+                          itemCount: postsController.postList.length,
+                          itemBuilder: (context, index) {
+                            return Text(postsController.postList[index].body
+                                .toString());
+                          }),
+                    )
+            ],
+          );
+        },
+      )),
+    );
   }
 }

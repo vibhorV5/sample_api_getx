@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:sample_api/models/posts.dart';
 
 class PostsController extends GetxController {
-  var postList = <Posts>[].obs;
+  RxList postList = <Posts>[].obs;
 
   @override
   void onInit() {
@@ -12,7 +12,7 @@ class PostsController extends GetxController {
     super.onInit();
   }
 
-  Future<List<Posts>> getPosts() async {
+  Future<dynamic> getPosts() async {
     final response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
 
