@@ -3,16 +3,16 @@ import 'package:get/get.dart';
 import 'package:sample_api/screens/posts/controller/posts_controller.dart';
 
 class PostsView extends StatelessWidget {
-  PostsView({super.key});
-
-  final PostsController postsController = Get.put(PostsController());
+  const PostsView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final PostsController postsController = Get.put(PostsController());
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Sample API using GETX',
+          'Posts loaded using GETX',
         ),
       ),
       backgroundColor: Colors.red,
