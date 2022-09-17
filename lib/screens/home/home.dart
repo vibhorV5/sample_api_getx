@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sample_api/services/photos/photos_services.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -22,7 +23,7 @@ class Home extends StatelessWidget {
                 width: 100,
                 child: TextButton(
                   child: Text('Load Posts'),
-                  onPressed: () {
+                  onPressed: () async {
                     Get.toNamed('/posts');
                   },
                 ),
@@ -36,7 +37,9 @@ class Home extends StatelessWidget {
                 width: 100,
                 child: TextButton(
                   child: Text('Load Photos'),
-                  onPressed: () {
+                  onPressed: () async {
+                    // await Get.putAsync<PhotosService>(
+                    //     () async => PhotosService());
                     Get.toNamed('/photos');
                   },
                 ),
