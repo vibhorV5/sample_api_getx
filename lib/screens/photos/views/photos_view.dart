@@ -13,32 +13,21 @@ class _PhotosViewState extends State<PhotosView> {
   final photosService = Get.put(PhotosService());
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // photosService.getPhotos();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // Get.put<PhotosService>(PhotosService());
-
-    // final photosService = Get.put(PhotosService());
-
     return Scaffold(
         appBar: AppBar(
           leading: InkWell(
             onTap: () {
-              Get.reset();
+              Get.delete<PhotosService>();
               Get.deleteAll();
               Get.back();
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.yellow,
             ),
           ),
-          title: Text('Photos loaded using GETX'),
+          title: const Text('Photos loaded using GETX'),
           backgroundColor: Colors.red,
         ),
         body: SingleChildScrollView(
@@ -96,9 +85,3 @@ class _PhotosViewState extends State<PhotosView> {
         ));
   }
 }
-
-// void disposeService(BuildContext context) {
-//   Get.delete(PhotosService());
-// }
-
-

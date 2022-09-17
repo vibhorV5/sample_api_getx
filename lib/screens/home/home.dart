@@ -24,13 +24,13 @@ class Home extends StatelessWidget {
                 height: 50,
                 width: 100,
                 child: TextButton(
-                  child: Text('Load Posts'),
+                  child: const Text('Load Posts'),
                   onPressed: () async {
                     Get.toNamed('/posts');
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(

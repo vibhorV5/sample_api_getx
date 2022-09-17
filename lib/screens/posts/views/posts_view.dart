@@ -16,8 +16,12 @@ class PostsView extends StatelessWidget {
             Get.deleteAll();
             Get.back();
           },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.yellow,
+          ),
         ),
-        title: Text(
+        title: const Text(
           'Posts loaded using GETX',
         ),
       ),
