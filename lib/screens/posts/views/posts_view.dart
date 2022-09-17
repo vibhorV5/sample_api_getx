@@ -11,6 +11,12 @@ class PostsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Get.deleteAll();
+            Get.back();
+          },
+        ),
         title: Text(
           'Posts loaded using GETX',
         ),

@@ -27,6 +27,17 @@ class _PhotosViewState extends State<PhotosView> {
 
     return Scaffold(
         appBar: AppBar(
+          leading: InkWell(
+            onTap: () {
+              Get.reset();
+              Get.deleteAll();
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.yellow,
+            ),
+          ),
           title: Text('Photos loaded using GETX'),
           backgroundColor: Colors.red,
         ),
@@ -85,3 +96,9 @@ class _PhotosViewState extends State<PhotosView> {
         ));
   }
 }
+
+// void disposeService(BuildContext context) {
+//   Get.delete(PhotosService());
+// }
+
+
