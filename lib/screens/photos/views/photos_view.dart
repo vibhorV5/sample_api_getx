@@ -2,16 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_api/services/photos/photos_services.dart';
 
-class PhotosView extends StatelessWidget {
+class PhotosView extends StatefulWidget {
   const PhotosView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // final PhotosController photosController = Get.put(PhotosController());
+  State<PhotosView> createState() => _PhotosViewState();
+}
 
+class _PhotosViewState extends State<PhotosView> {
+  final photosService = Get.put(PhotosService());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // photosService.getPhotos();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // Get.put<PhotosService>(PhotosService());
 
-    final photosService = Get.put(PhotosService());
+    // final photosService = Get.put(PhotosService());
 
     return Scaffold(
         appBar: AppBar(
@@ -23,7 +35,7 @@ class PhotosView extends StatelessWidget {
             () {
               return Column(
                 children: [
-                  photosService.photosList.isEmpty
+                  photosService.isLoading == true
                       ? Container(
                           height: 750,
                           width: 600,

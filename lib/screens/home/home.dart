@@ -7,6 +7,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final photosService = Get.put(PhotosService());
+
     return Scaffold(
       backgroundColor: Colors.red,
       body: SingleChildScrollView(
@@ -38,9 +40,9 @@ class Home extends StatelessWidget {
                 child: TextButton(
                   child: Text('Load Photos'),
                   onPressed: () async {
-                    // await Get.putAsync<PhotosService>(
-                    //     () async => PhotosService());
                     Get.toNamed('/photos');
+
+                    await Get.find<PhotosService>().getPhotos();
                   },
                 ),
               ),

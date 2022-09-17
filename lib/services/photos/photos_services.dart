@@ -4,16 +4,17 @@ import 'package:sample_api/models/photos.dart';
 import 'package:http/http.dart' as http;
 
 class PhotosService extends GetxService {
-  @override
-  void onInit() {
-    getPhotos();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   getPhotos();
+  //   super.onInit();
+  // }
 
   RxList photosList = <Photos>[].obs;
-  // var photosList = [];
+  RxBool isLoading = true.obs;
 
   Future<dynamic> getPhotos() async {
+    isLoading(true);
     final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
@@ -23,10 +24,12 @@ class PhotosService extends GetxService {
       for (Map<String, dynamic> i in data) {
         photosList.add(Photos.fromJson(i));
       }
+      isLoading(false);
       return photosList;
     } else {
       photosList;
     }
+
     return photosList;
   }
 }
