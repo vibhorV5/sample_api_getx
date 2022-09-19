@@ -24,7 +24,7 @@ class _PhotosViewState extends State<PhotosView> {
             },
             child: const Icon(
               Icons.arrow_back,
-              color: Colors.yellow,
+              color: Colors.white,
             ),
           ),
           title: const Text('Photos loaded using GETX'),

@@ -18,7 +18,7 @@ class PostsView extends StatelessWidget {
           },
           child: const Icon(
             Icons.arrow_back,
-            color: Colors.yellow,
+            color: Colors.white,
           ),
         ),
         title: const Text(
