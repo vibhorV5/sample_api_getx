@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sample_api/screens/products/controller/products_controller.dart';
 import 'package:sample_api/services/photos/photos_services.dart';
+import 'package:sample_api/services/products/products_service.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,8 +11,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final productsController = Get.put(ProductsController());
-  final photosService = Get.put(PhotosService());
+  @override
+  void initState() {
+    super.initState();
+    final productsService = Get.put(ProductsService());
+    final photosService = Get.put(PhotosService());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +53,10 @@ class _HomeState extends State<Home> {
                     child: TextButton(
                       child: const Text('Products'),
                       onPressed: () async {
+                        //multiple instances of products controller are created
                         Get.toNamed('/products');
-                        Get.put(ProductsController());
-                        await Get.find<ProductsController>().getProducts();
+                        // Get.put(ProductsController());
+                        await Get.find<ProductsService>().getProducts();
                       },
                     ),
                   ),
@@ -64,6 +74,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Wishlist'),
                       onPressed: () async {
                         Get.toNamed('/wishlist');
+                        // await Get.find<PhotosService>().getPhotos();
                       },
                     ),
                   ),

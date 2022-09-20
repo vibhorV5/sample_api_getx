@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sample_api/screens/products/controller/products_controller.dart';
-import 'package:sample_api/services/wishlist/wishlist_service.dart';
+// import 'package:sample_api/screens/products/controller/products_controller.dart';
+import 'package:sample_api/services/products/products_service.dart';
+// import 'package:sample_api/services/wishlist/wishlist_service.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({super.key});
@@ -11,8 +12,8 @@ class ProductsView extends StatefulWidget {
 }
 
 class _ProductsViewState extends State<ProductsView> {
-  final productsController = Get.put(ProductsController());
-  final wishlistService = Get.put(WishlistService());
+  // final productsController = Get.put(ProductsController());
+  // final wishlistService = Get.put(WishlistService());
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _ProductsViewState extends State<ProductsView> {
         leading: InkWell(
           onTap: () {
             // Get.deleteAll();
-            Get.delete<ProductsController>();
+            // Get.delete<ProductsController>();
             Get.back();
           },
           child: const Icon(
@@ -82,7 +83,7 @@ class _ProductsViewState extends State<ProductsView> {
             ),
             Obx(
               () {
-                return productsController.isLoading.isTrue
+                return Get.find<ProductsService>().isLoading.isTrue
                     ? const Padding(
                         padding: EdgeInsets.only(top: 20.0),
                         child: CircularProgressIndicator(),
@@ -94,7 +95,9 @@ class _ProductsViewState extends State<ProductsView> {
                             height: 700,
                             width: 600,
                             child: GridView.builder(
-                              itemCount: productsController.productsList.length,
+                              itemCount: Get.find<ProductsService>()
+                                  .productsList
+                                  .length,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -105,12 +108,15 @@ class _ProductsViewState extends State<ProductsView> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    wishlistService.wishlistItemsList.add(
-                                        productsController.productsList[index]);
+                                    Get.find<ProductsService>()
+                                        .wishlistItemsList
+                                        .add(Get.find<ProductsService>()
+                                            .productsList[index]);
 
                                     debugPrint('Product added to wishlist');
-                                    debugPrint(wishlistService
-                                        .wishlistItemsList[index].title);
+                                    debugPrint(Get.find<ProductsService>()
+                                        .wishlistItemsList[index]
+                                        .title);
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.only(
@@ -133,21 +139,24 @@ class _ProductsViewState extends State<ProductsView> {
                                               padding: const EdgeInsets.only(
                                                   top: 8.0),
                                               child: Text(
-                                                productsController
-                                                    .productsList[index].title
+                                                Get.find<ProductsService>()
+                                                    .productsList[index]
+                                                    .title
                                                     .toString(),
                                               ),
                                             ),
                                           ],
                                         ),
                                         Text(
-                                          productsController
-                                              .productsList[index].id
+                                          Get.find<ProductsService>()
+                                              .productsList[index]
+                                              .id
                                               .toString(),
                                         ),
                                         Text(
-                                          productsController
-                                              .productsList[index].id
+                                          Get.find<ProductsService>()
+                                              .productsList[index]
+                                              .id
                                               .toString(),
                                         ),
                                       ],

@@ -12,6 +12,8 @@ class PhotosView extends StatefulWidget {
 class _PhotosViewState extends State<PhotosView> {
   final photosService = Get.put(PhotosService());
 
+//iti
+//dispose list empty photos
   @override
   Widget build(BuildContext context) {
     return Scaffold(

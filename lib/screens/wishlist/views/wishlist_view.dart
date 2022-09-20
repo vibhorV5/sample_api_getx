@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sample_api/services/wishlist/wishlist_service.dart';
+import 'package:sample_api/services/products/products_service.dart';
 
 class WishlistView extends StatefulWidget {
   const WishlistView({super.key});
@@ -10,11 +10,17 @@ class WishlistView extends StatefulWidget {
 }
 
 class _WishlistViewState extends State<WishlistView> {
-  final wishlistService = Get.put(WishlistService());
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    // Get.find<ProductsService>().wishlistItemsList = RxList.empty();
+  }
+  // final wishlistService = Get.put(WishlistService());
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('Hello = ${wishlistService.wishlistItemsList}');
+    // debugPrint('Hello = ${wishlistService.wishlistItemsList}');
     final mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,7 +46,7 @@ class _WishlistViewState extends State<WishlistView> {
           children: [
             Obx(
               () {
-                return wishlistService.wishlistItemsList.isEmpty
+                return Get.find<ProductsService>().wishlistItemsList.isEmpty
                     ? Center(
                         child: Container(
                           padding: const EdgeInsets.only(
@@ -59,7 +65,9 @@ class _WishlistViewState extends State<WishlistView> {
                         width: 600,
                         color: Colors.white,
                         child: ListView.builder(
-                          itemCount: wishlistService.wishlistItemsList.length,
+                          itemCount: Get.find<ProductsService>()
+                              .wishlistItemsList
+                              .length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
@@ -73,8 +81,9 @@ class _WishlistViewState extends State<WishlistView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      wishlistService
-                                          .wishlistItemsList[index].title
+                                      Get.find<ProductsService>()
+                                          .wishlistItemsList[index]
+                                          .title
                                           .toString(),
                                       style:
                                           const TextStyle(color: Colors.black),

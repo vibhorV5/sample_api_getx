@@ -4,17 +4,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:sample_api/models/products.dart';
 
-class ProductsController extends GetxController {
+class ProductsService extends GetxService {
   //service
+
+  final RxList<Product> productsList = <Product>[].obs;
+  RxList<Product> wishlistItemsList = <Product>[].obs;
   RxBool isLoading = true.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    getProducts();
-  }
-
-  final RxList productsList = <Product>[].obs;
 
   Future<dynamic> getProducts() async {
     isLoading(true);
@@ -32,5 +27,13 @@ class ProductsController extends GetxController {
     } else {
       productsList;
     }
+  }
+
+  Future<dynamic> getWishlist() async {}
+
+  @override
+  void onInit() {
+    super.onInit();
+    getProducts();
   }
 }
