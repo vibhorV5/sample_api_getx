@@ -35,7 +35,7 @@ class _PhotosViewState extends State<PhotosView> {
             () {
               return Column(
                 children: [
-                  photosService.isLoading == true
+                  photosService.isLoading.isTrue
                       ? Container(
                           height: 750,
                           width: 600,
@@ -57,7 +57,7 @@ class _PhotosViewState extends State<PhotosView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 120,
                                       width: 120,
                                       child: Image.network(
@@ -66,7 +66,7 @@ class _PhotosViewState extends State<PhotosView> {
                                             .toString(),
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       height: 120,
                                       width: 120,
                                       child: Image.network(

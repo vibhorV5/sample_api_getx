@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sample_api/models/products.dart';
-import 'package:sample_api/screens/wishlist/controller/wishlist_controller.dart';
+import 'package:sample_api/screens/products/controller/products_controller.dart';
 import 'package:sample_api/services/photos/photos_services.dart';
 
 class Home extends StatefulWidget {
@@ -12,43 +11,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final productsController = Get.put(ProductsController());
   final photosService = Get.put(PhotosService());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: BottomAppBar(
-      //   child: Container(
-      //     height: 55,
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //       children: [
-      //         InkWell(
-      //           onTap: () {},
-      //           child: const Icon(
-      //             Icons.home_filled,
-      //             color: Colors.black,
-      //             size: 40,
-      //           ),
-      //         ),
-      //         InkWell(
-      //           onTap: () {
-      //             Get.toNamed('/wishlist');
-      //           },
-      //           child: const Icon(
-      //             Icons.favorite_rounded,
-      //             color: Colors.black,
-      //             size: 40,
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: const Center(child: Text('Home')),
+      ),
       backgroundColor: Colors.red,
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 20, right: 20),
           height: 800,
           width: 600,
           child: Column(
@@ -69,6 +45,8 @@ class _HomeState extends State<Home> {
                       child: const Text('Products'),
                       onPressed: () async {
                         Get.toNamed('/products');
+                        Get.put(ProductsController());
+                        await Get.find<ProductsController>().getProducts();
                       },
                     ),
                   ),
@@ -83,17 +61,15 @@ class _HomeState extends State<Home> {
                     height: 40,
                     width: 100,
                     child: TextButton(
-                      child: Text('Wishlist'),
+                      child: const Text('Wishlist'),
                       onPressed: () async {
                         Get.toNamed('/wishlist');
-
-                        await Get.find<PhotosService>().getPhotos();
                       },
                     ),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
@@ -124,10 +100,10 @@ class _HomeState extends State<Home> {
                     height: 40,
                     width: 100,
                     child: TextButton(
-                      child: Text('Load Photos'),
+                      child: const Text('Load Photos'),
                       onPressed: () async {
                         Get.toNamed('/photos');
-
+                        // final photosService = Get.put(PhotosService());
                         await Get.find<PhotosService>().getPhotos();
                       },
                     ),

@@ -8,7 +8,6 @@ class PhotosService extends GetxService {
   RxBool isLoading = true.obs;
 
   Future<dynamic> getPhotos() async {
-    // var check = 0;
     isLoading(true);
     final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
@@ -20,13 +19,10 @@ class PhotosService extends GetxService {
         photosList.add(Photos.fromJson(i));
       }
       isLoading(false);
-      // check = check + 500;
-      // print('Vibhor = $check');
       return photosList;
     } else {
       photosList;
     }
-
     return photosList;
   }
 }

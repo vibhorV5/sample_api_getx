@@ -5,9 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:sample_api/models/products.dart';
 
 class ProductsController extends GetxController {
+  RxBool isLoading = true.obs;
+
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     getProducts();
   }
@@ -15,6 +16,7 @@ class ProductsController extends GetxController {
   final RxList productsList = <Product>[].obs;
 
   Future<dynamic> getProducts() async {
+    isLoading(true);
     final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
@@ -23,6 +25,7 @@ class ProductsController extends GetxController {
     if (response.statusCode == 200) {
       for (Map<String, dynamic> i in jsonData) {
         productsList.add(Product.fromJson(i));
+        isLoading(false);
       }
       return productsList;
     } else {
