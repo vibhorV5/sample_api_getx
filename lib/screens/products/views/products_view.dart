@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sample_api/routes/routes.dart';
 // import 'package:sample_api/screens/products/controller/products_controller.dart';
 import 'package:sample_api/services/products/products_service.dart';
 // import 'package:sample_api/services/wishlist/wishlist_service.dart';
@@ -55,7 +56,7 @@ class _ProductsViewState extends State<ProductsView> {
                     child: const Text('Home'),
                     onPressed: () async {
                       await Get.deleteAll();
-                      Get.toNamed('/home');
+                      Get.toNamed(home);
                     },
                   ),
                 ),
@@ -72,7 +73,7 @@ class _ProductsViewState extends State<ProductsView> {
                   child: TextButton(
                     child: const Text('Wishlist'),
                     onPressed: () async {
-                      Get.toNamed('/wishlist');
+                      Get.toNamed(wishlist);
                       // final photosService = Get.put(PhotosService());
 
                       // await Get.find<PhotosService>().getPhotos();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sample_api/routes/routes.dart';
 import 'package:sample_api/services/photos/photos_services.dart';
 import 'package:sample_api/services/products/products_service.dart';
 
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
                       child: const Text('Products'),
                       onPressed: () async {
                         //multiple instances of products controller are created
-                        Get.toNamed('/products');
+                        Get.toNamed(products);
                         // Get.put(ProductsController());
                         await Get.find<ProductsService>().getProducts();
                       },
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
                     child: TextButton(
                       child: const Text('Wishlist'),
                       onPressed: () async {
-                        Get.toNamed('/wishlist');
+                        Get.toNamed(wishlist);
                         // await Get.find<PhotosService>().getPhotos();
                       },
                     ),
@@ -96,7 +97,7 @@ class _HomeState extends State<Home> {
                     child: TextButton(
                       child: const Text('Load Posts'),
                       onPressed: () async {
-                        Get.toNamed('/posts');
+                        Get.toNamed(posts);
                       },
                     ),
                   ),
@@ -113,7 +114,7 @@ class _HomeState extends State<Home> {
                     child: TextButton(
                       child: const Text('Load Photos'),
                       onPressed: () async {
-                        Get.toNamed('/photos');
+                        Get.toNamed(photos);
                         // final photosService = Get.put(PhotosService());
                         await Get.find<PhotosService>().getPhotos();
                       },
