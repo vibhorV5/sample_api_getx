@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_api/routes/routes.dart';
-// import 'package:sample_api/screens/products/controller/products_controller.dart';
 import 'package:sample_api/services/products/products_service.dart';
-// import 'package:sample_api/services/wishlist/wishlist_service.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({super.key});
@@ -13,17 +11,12 @@ class ProductsView extends StatefulWidget {
 }
 
 class _ProductsViewState extends State<ProductsView> {
-  // final productsController = Get.put(ProductsController());
-  // final wishlistService = Get.put(WishlistService());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-            // Get.deleteAll();
-            // Get.delete<ProductsController>();
             Get.back();
           },
           child: const Icon(
@@ -74,9 +67,6 @@ class _ProductsViewState extends State<ProductsView> {
                     child: const Text('Wishlist'),
                     onPressed: () async {
                       Get.toNamed(wishlist);
-                      // final photosService = Get.put(PhotosService());
-
-                      // await Get.find<PhotosService>().getPhotos();
                     },
                   ),
                 ),

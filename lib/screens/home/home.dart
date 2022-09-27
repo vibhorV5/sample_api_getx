@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sample_api/routes/routes.dart';
+import 'package:sample_api/services/cart/cart_services.dart';
 import 'package:sample_api/services/photos/photos_services.dart';
 import 'package:sample_api/services/products/products_service.dart';
 
@@ -15,13 +16,9 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    final productsService = Get.put(ProductsService());
-    final photosService = Get.put(PhotosService());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    Get.put(ProductsService());
+    Get.put(PhotosService());
+    Get.put(CartServices());
   }
 
   @override
@@ -75,7 +72,24 @@ class _HomeState extends State<Home> {
                       child: const Text('Wishlist'),
                       onPressed: () async {
                         Get.toNamed(wishlist);
-                        // await Get.find<PhotosService>().getPhotos();
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.black,
+                    ),
+                    height: 40,
+                    width: 100,
+                    child: TextButton(
+                      child: const Text('Cart'),
+                      onPressed: () async {
+                        Get.toNamed(cart);
+                        Get.find<CartServices>().getData();
                       },
                     ),
                   ),
@@ -115,13 +129,24 @@ class _HomeState extends State<Home> {
                       child: const Text('Load Photos'),
                       onPressed: () async {
                         Get.toNamed(photos);
-                        // final photosService = Get.put(PhotosService());
+                        // Get.find<CartServices>().getData();
                         await Get.find<PhotosService>().getPhotos();
                       },
                     ),
                   ),
                 ],
               ),
+              // TextButton(
+              //     onPressed: () {
+              //       Get.find<CartServices>().getData();
+              //     },
+              //     child: Text(
+              //       'GET DATA',
+              //       style: TextStyle(color: Colors.black),
+              //     )),
+              // Obx(() {
+              //   return Text('Hello = ${Get.find<CartServices>().hello}');
+              // }),
             ],
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sample_api/models/cart_item.dart';
+import 'package:sample_api/services/cart/cart_services.dart';
 import 'package:sample_api/services/products/products_service.dart';
 
 class WishlistView extends StatefulWidget {
@@ -12,15 +14,11 @@ class WishlistView extends StatefulWidget {
 class _WishlistViewState extends State<WishlistView> {
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    // Get.find<ProductsService>().wishlistItemsList = RxList.empty();
   }
-  // final wishlistService = Get.put(WishlistService());
 
   @override
   Widget build(BuildContext context) {
-    // debugPrint('Hello = ${wishlistService.wishlistItemsList}');
     final mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -64,36 +62,79 @@ class _WishlistViewState extends State<WishlistView> {
                         height: 780,
                         width: 600,
                         color: Colors.white,
-                        child: ListView.builder(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 10,
+                            );
+                          },
                           itemCount: Get.find<ProductsService>()
                               .wishlistItemsList
                               .length,
                           itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.red.withOpacity(0.7),
-                                    borderRadius: BorderRadius.circular(20),
+                            return Container(
+                              padding: const EdgeInsets.only(
+                                  top: 10, left: 10, right: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.red.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              height: 100,
+                              width: mediaQuery.width,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    Get.find<ProductsService>()
+                                        .wishlistItemsList[index]
+                                        .title
+                                        .toString(),
+                                    style: const TextStyle(color: Colors.black),
                                   ),
-                                  height: 80,
-                                  width: mediaQuery.width,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      Get.find<ProductsService>()
-                                          .wishlistItemsList[index]
-                                          .title
-                                          .toString(),
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          //Item Check
+                                          // if (Get.find<CartServices>()
+                                          //     .cartItems
+                                          //     .contains(CartItem(
+                                          //         title: Get.find<
+                                          //                 ProductsService>()
+                                          //             .wishlistItemsList[index]
+                                          //             .title
+                                          //             .toString(),
+                                          //         quantity: 1))) {
+                                          //   return;
+                                          // }
+
+                                          Get.find<CartServices>().addToCart(
+                                            CartItem(
+                                              title: Get.find<ProductsService>()
+                                                  .wishlistItemsList[index]
+                                                  .title
+                                                  .toString(),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(5),
+                                          color: Colors.white,
+                                          child: const Text(
+                                            'Add to Cart',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                                ],
+                              ),
                             );
                           },
                         ),
